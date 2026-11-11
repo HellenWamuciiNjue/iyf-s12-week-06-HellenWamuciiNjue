@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Load config first, then application logic -->
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Weather Dashboard</h1>
+        
+        <form id="search-form">
+            <input type="text" id="city-input" placeholder="Enter city name..." autocomplete="off">
+            <button type="submit">Search</button>
+        </form>
+
+        <div id="loading-indicator" class="hidden">Loading weather dynamics...</div>
+        <div id="error-display" class="hidden"></div>
+
+        <div id="weather-display" class="hidden">
+            <div class="main-info">
+                <h2 id="city-name"></h2>
+                <img id="weather-icon" src="" alt="Weather Icon">
+                <div id="temperature"></div>
+                <p id="description"></p>
+            </div>
+            <div class="details-grid">
+                <div class="detail-card">Feels Like: <span id="feels-like"></span></div>
+                <div class="detail-card">Humidity: <span id="humidity"></span></div>
+                <div class="detail-card">Wind: <span id="wind"></span></div>
+                <div class="detail-card">Pressure: <span id="pressure"></span></div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h3>Recent Searches</h3>
+            <div id="history-list"></div>
+        </div>
+    </div>
+</body>
+</html>
