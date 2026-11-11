@@ -3,7 +3,7 @@
 
 ## Live Project
 
-**Live Demo:** [View Weather Dashboard](https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/)
+**Live Demo:** [View Weather Dashboard](https://HellenWamuciiNjue.github.io/iyf-s12-week-06-HellenWamuciiNjue/)
 
 ## Project Overview
 
