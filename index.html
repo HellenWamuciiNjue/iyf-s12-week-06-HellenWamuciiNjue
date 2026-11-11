@@ -3,43 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101b36">
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Load config first, then application logic -->
     <script src="config.js" defer></script>
     <script src="app.js" defer></script>
 </head>
 <body>
-    <div class="dashboard-container">
-        <h1>Weather Dashboard</h1>
-        
-        <form id="search-form">
-            <input type="text" id="city-input" placeholder="Enter city name..." autocomplete="off">
-            <button type="submit">Search</button>
-        </form>
+    <main class="dashboard-shell">
+        <header class="topbar">
+            <a class="brand" href="./" aria-label="Weather Dashboard home">
+                <span class="brand-mark">☼</span>
+                <span>Weather<span class="brand-light">ly</span></span>
+            </a>
+            <span class="live-label"><i></i> LIVE WEATHER</span>
+        </header>
 
-        <div id="loading-indicator" class="hidden">Loading weather dynamics...</div>
-        <div id="error-display" class="hidden"></div>
-
-        <div id="weather-display" class="hidden">
-            <div class="main-info">
-                <h2 id="city-name"></h2>
-                <img id="weather-icon" src="" alt="Weather Icon">
-                <div id="temperature"></div>
-                <p id="description"></p>
+        <section class="search-panel" aria-label="Search for a city">
+            <div>
+                <p class="eyebrow">YOUR WEATHER, MADE CLEAR</p>
+                <h1>What's the weather<br><span>looking like?</span></h1>
             </div>
-            <div class="details-grid">
-                <div class="detail-card">Feels Like: <span id="feels-like"></span></div>
-                <div class="detail-card">Humidity: <span id="humidity"></span></div>
-                <div class="detail-card">Wind: <span id="wind"></span></div>
-                <div class="detail-card">Pressure: <span id="pressure"></span></div>
-            </div>
-        </div>
+            <form id="search-form" class="search-form">
+                <label class="sr-only" for="city-input">Enter a city</label>
+                <span class="search-symbol" aria-hidden="true">⌕</span>
+                <input type="text" id="city-input" placeholder="Search a city e.g. Nairobi" autocomplete="off" required>
+                <button type="submit">Search <span aria-hidden="true">→</span></button>
+            </form>
+            <div id="loading-indicator" class="loading hidden"><span class="spinner"></span> Reading the sky...</div>
+            <div id="error-display" class="error hidden" role="alert"></div>
+        </section>
 
-        <div class="history-section">
-            <h3>Recent Searches</h3>
-            <div id="history-list"></div>
-        </div>
-    </div>
+        <section id="weather-display" class="weather-layout hidden" aria-live="polite">
+            <article class="hero-card">
+                <div class="hero-copy">
+                    <p class="eyebrow" id="weather-date">CURRENT CONDITIONS</p>
+                    <h2 id="city-name">Nairobi, KE</h2>
+                    <p id="description" class="condition-copy">Partly cloudy</p>
+                    <div class="temperature-line"><span id="temperature">--°</span><span class="temperature-unit">C</span></div>
+                    <p class="feels-copy">Feels like <strong id="feels-like">--°C</strong></p>
+                </div>
+                <div id="weather-scene" class="weather-scene clear" aria-hidden="true">
+                    <div class="scene-sun"></div>
+                    <div class="scene-cloud cloud-one"></div>
+                    <div class="scene-cloud cloud-two"></div>
+                    <div class="scene-rain"></div>
+                    <div class="scene-snow"></div>
+                    <div class="scene-lightning">ϟ</div>
+                    <div class="scene-umbrella">☂</div>
+                    <div class="scene-car"><span class="car-window"></span><span class="car-wiper"></span><span class="car-wheel wheel-one"></span><span class="car-wheel wheel-two"></span></div>
+                    <div class="scene-hills"></div>
+                    <div class="scene-ground"></div>
+                    <div class="scene-weather-icon" id="weather-symbol">☀️</div>
+                </div>
+                <div class="hero-bottom">
+                    <span id="condition-summary">A look at the sky right now</span>
+                    <span id="updated-time">Updated just now</span>
+                </div>
+            </article>
+
+            <section class="insight-card">
+                <div class="section-heading"><div><p class="eyebrow">SMART WEATHER GUIDE</p><h3>What it means for your day</h3></div><span class="sparkle">✦</span></div>
+                <div id="insights-list" class="insights-list"></div>
+            </section>
+
+            <section class="details-section">
+                <div class="section-heading"><div><p class="eyebrow">THE DETAILS</p><h3>Weather at a glance</h3></div></div>
+                <div class="details-grid">
+                    <article class="detail-card"><span class="detail-icon">💧</span><div><p>Humidity</p><strong id="humidity">--%</strong></div></article>
+                    <article class="detail-card"><span class="detail-icon">💨</span><div><p>Wind speed</p><strong id="wind">-- m/s</strong></div></article>
+                    <article class="detail-card"><span class="detail-icon">🌡️</span><div><p>Pressure</p><strong id="pressure">-- hPa</strong></div></article>
+                    <article class="detail-card"><span class="detail-icon">👁️</span><div><p>Visibility</p><strong id="visibility">-- km</strong></div></article>
+                    <article class="detail-card"><span class="detail-icon">🌅</span><div><p>Sunrise</p><strong id="sunrise">--:--</strong></div></article>
+                    <article class="detail-card"><span class="detail-icon">🌇</span><div><p>Sunset</p><strong id="sunset">--:--</strong></div></article>
+                </div>
+            </section>
+
+            <section class="forecast-section">
+                <div class="section-heading"><div><p class="eyebrow">COMING UP</p><h3>Next hours</h3></div><span class="muted-note">3-hour outlook</span></div>
+                <div id="hourly-forecast" class="hourly-forecast"></div>
+            </section>
+
+            <section class="forecast-section">
+                <div class="section-heading"><div><p class="eyebrow">PLAN AHEAD</p><h3>5-day forecast</h3></div></div>
+                <div id="daily-forecast" class="daily-forecast"></div>
+            </section>
+        </section>
+
+        <section class="history-section">
+            <div class="section-heading"><div><p class="eyebrow">QUICK ACCESS</p><h3>Recent searches</h3></div><span class="history-caption">Your latest places</span></div>
+            <div id="history-list" class="history-list"><span class="empty-history">Your searched cities will appear here.</span></div>
+        </section>
+        <footer><span>Weatherly</span> · Make every day a little more predictable.</footer>
+    </main>
 </body>
 </html>
