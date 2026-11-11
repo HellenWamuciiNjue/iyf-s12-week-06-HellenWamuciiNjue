@@ -25,7 +25,7 @@ jobs:
       - name: Write config.js from the repository secret
         env:
           OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-        run: echo "const API_KEY = \"$OPENWEATHER_API_KEY\";" > config.js
+        run: printf 'window.CONFIG = { WEATHER_API_KEY: "%s" };\n' "$OPENWEATHER_API_KEY" > config.js
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
