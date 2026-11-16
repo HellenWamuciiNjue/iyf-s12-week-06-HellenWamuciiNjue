@@ -244,9 +244,3 @@ function clearStatusDisplays() {
 }
 
 renderHistory();
-catch (error) {
-    console.error('Weather dashboard error:', error);
-    showError(navigator.onLine ? error.message : 'You appear to be offline. Check your connection and try again.');
-} finally {
-    showLoading(false);
-}
